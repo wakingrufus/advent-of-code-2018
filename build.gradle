@@ -6,7 +6,7 @@ plugins {
     id 'application'
 }
 
-mainClassName = "com.github.wakingrufus.website.MainKt"
+mainClassName = "com.github.wakingrufus.aoc.MainKt"
 repositories {
     mavenCentral()
     jcenter()

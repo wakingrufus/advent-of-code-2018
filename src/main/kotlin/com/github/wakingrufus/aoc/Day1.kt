@@ -7,7 +7,7 @@ class Day1 {
     companion object : KLogging()
 
     fun calculateFrequency(values: List<String>): Int {
-        return values.map { Integer.parseInt(it) }.sum()
+        return values.map(String::toInt).sum()
     }
 
     fun processInput(): List<String> {
