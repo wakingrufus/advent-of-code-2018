@@ -1,24 +1,16 @@
 package com.github.wakingrufus.aoc
 
-fun main(){
+fun main() {
     Day1().run {
-        calculateFrequency(processInput())
-    }.also {
-        System.out.println("Day 1 Part 1: $it")
-    }
+        time { calculateFrequency(processInput()) }
+    }.also { outputResult(1, 1, it) }
     Day1().run {
-        part2(processInput())
-    }.also {
-        System.out.println("Day 1 Part 2: $it")
-    }
+        time { part2(processInput()) }
+    }.also { outputResult(1, 2, it) }
     Day2().run {
-        checksum(processInput())
-    }.also {
-        System.out.println("Day 2 Part 1: $it")
-    }
+        time { checksum(processInput()) }
+    }.also { outputResult(2, 1, it) }
     Day2().run {
-        part2(processInput())
-    }.also {
-        System.out.println("Day 2 Part 2: $it")
-    }
+        time { part2(processInput()) }
+    }.also { outputResult(2, 2, it) }
 }
