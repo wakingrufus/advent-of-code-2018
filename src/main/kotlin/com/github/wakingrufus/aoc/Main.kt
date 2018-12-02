@@ -16,4 +16,9 @@ fun main(){
     }.also {
         System.out.println("Day 2 Part 1: $it")
     }
+    Day2().run {
+        part2(processInput())
+    }.also {
+        System.out.println("Day 2 Part 2: $it")
+    }
 }
