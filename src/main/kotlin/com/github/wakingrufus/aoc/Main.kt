@@ -11,4 +11,9 @@ fun main(){
     }.also {
         System.out.println("Day 1 Part 2: $it")
     }
+    Day2().run {
+        checksum(processInput())
+    }.also {
+        System.out.println("Day 2 Part 1: $it")
+    }
 }

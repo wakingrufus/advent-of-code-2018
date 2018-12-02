@@ -14,9 +14,7 @@ class Day1 {
     }
 
     fun processInput(): List<String> {
-        return ClassLoader.getSystemResourceAsStream("input-day1.txt")
-                .bufferedReader()
-                .use { it.readLines() }
+        return inputFileToLines("input-day1.txt")
                 .map {
                     logger.info(it)
                     it
