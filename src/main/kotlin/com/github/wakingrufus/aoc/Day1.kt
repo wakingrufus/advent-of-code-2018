@@ -27,19 +27,15 @@ class Day1 {
         val intValues = values.map(String::toInt)
         var freq = 0
         val seenBefore = mutableSetOf(freq)
-        sequence {
+        return sequence {
             while (true) {
                 yieldAll(intValues)
             }
-        }.forEach {
-            val newFreq = freq + it
-            if (seenBefore.contains(newFreq)) {
-                return newFreq
-            } else {
-                freq = newFreq
-                seenBefore += newFreq
-            }
+        }.map {
+            freq += it
+            freq
+        }.first {
+            !seenBefore.add(it)
         }
-        throw RuntimeException()
     }
 }
