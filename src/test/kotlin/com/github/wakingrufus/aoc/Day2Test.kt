@@ -39,4 +39,22 @@ internal class Day2Test {
                     "c" to "d")
         }
     }
+
+    @Test
+    fun `test part 1 solution`(){
+        Day2().run {
+            checksum(processInput())
+        }.also {
+            System.out.println("Day 2 Part 1: $it")
+        }
+    }
+
+    @Test
+    fun `test part 2 solution`(){
+        Day2().run {
+            part2(processInput())
+        }.also {
+            System.out.println("Day 2 Part 2: $it")
+        }
+    }
 }
