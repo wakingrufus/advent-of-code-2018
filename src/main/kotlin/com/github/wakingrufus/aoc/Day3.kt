@@ -17,6 +17,17 @@ class Day3 {
                 }
         return contestedPlots.size
     }
+
+    fun part2(claimInput: List<String>) = findNonIntersectingClaim(claimInput)
+
+    fun findNonIntersectingClaim(claimInput: List<String>): String? {
+        val claimList = claimInput.map { parseClaim(it) }
+        return claimList.find { subject ->
+            claimList.none {
+                subject.id != it.id && subject.intersects(it)
+            }
+        }?.id
+    }
 }
 
 data class Claim(val id: String,
@@ -31,6 +42,13 @@ fun Claim.expand(): List<Pair<Int, Int>> {
             x to y
         }
     }
+}
+
+fun Claim.intersects(otherClaim: Claim): Boolean {
+    return this.xOffset < (otherClaim.xOffset + otherClaim.width) &&
+            (this.xOffset + this.width) > otherClaim.xOffset &&
+            this.yOffset < (otherClaim.yOffset + otherClaim.height) &&
+            (this.yOffset + this.height) > otherClaim.yOffset
 }
 
 fun parseClaim(input: String): Claim {
