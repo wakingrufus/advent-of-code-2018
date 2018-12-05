@@ -17,6 +17,17 @@ internal class Day5Test {
     }
 
     @Test
+    fun `test fastReduce`() {
+        Day5().run {
+            assert(fastReduce("aA")).isEqualTo("")
+            assert(fastReduce("abBA")).isEqualTo("")
+            assert(fastReduce("abAB")).isEqualTo("abAB")
+            assert(fastReduce("aabAAB")).isEqualTo("aabAAB")
+            assert(fastReduce("dabAcCaCBAcCcaDA")).isEqualTo("dabCBAcaDA")
+        }
+    }
+
+    @Test
     fun `test part1 example`() {
         Day5().run {
             assert(part1("dabAcCaCBAcCcaDA")).isEqualTo(10)
@@ -41,6 +52,20 @@ internal class Day5Test {
                     .isEqualTo("daDA")
             assert(reduceWithout("dabAcCaCBAcCcaDA", 'd'))
                     .isEqualTo("abCBAc")
+        }
+    }
+
+    @Test
+    fun `test part1 example fast`() {
+        Day5().run {
+            assert(part1Fast("dabAcCaCBAcCcaDA")).isEqualTo(10)
+        }
+    }
+
+    @Test
+    fun `test part2 example fast`() {
+        Day5().run {
+            assert(part2Fast("dabAcCaCBAcCcaDA")).isEqualTo(4)
         }
     }
 }

@@ -8,6 +8,15 @@ class Day5 {
             .map { it.length }
             .min() ?: -1
 
+    fun part1Fast(input: String): Int = fastReduce(input).length
+    fun part2Fast(input: String): Int = 'a'.rangeTo('z')
+            .map { fastReduceWithout(input, it) }
+            .map { it.length }
+            .min() ?: -1
+
+    fun fastReduceWithout(string: String, char: Char): String =
+            fastReduce(string.replace(char.toString(), "", true))
+
     fun reduceWithout(string: String, char: Char): String =
             reduce(string.replace(char.toString(), "", true))
 
@@ -27,6 +36,23 @@ class Day5 {
             return reducedString
         }
         return reduce(reducedString)
+    }
+
+    fun fastReduce(input: String): String {
+        var string: String = input
+        var i = 0
+        while (i < string.length - 1) {
+            if (opposites(string[i] to string[i + 1])) {
+                string = string.removeRange(i, i + 2)
+                i--
+                if (i < 0) {
+                    i = 0
+                }
+            } else {
+                i++
+            }
+        }
+        return string
     }
 
     fun opposites(pair: Pair<Char, Char>): Boolean =
