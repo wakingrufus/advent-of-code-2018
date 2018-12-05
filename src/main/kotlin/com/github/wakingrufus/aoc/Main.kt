@@ -17,4 +17,8 @@ fun main() {
         time { findContestedArea(input) }.also { outputResult(3, 1, it) }
         time { part2(input) }.also { outputResult(3, 2, it) }
     }
+    Day4().run {
+        val input = inputFileToLines("input-day4.txt")
+        time { part1(input) }.also { outputResult(4, 1, it) }
+    }
 }
