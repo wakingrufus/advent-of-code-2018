@@ -22,4 +22,8 @@ fun main() {
         time { part1(input) }.also { outputResult(4, 1, it) }
         time { part2(input) }.also { outputResult(4, 2, it) }
     }
+    Day5().run {
+        val input = inputFileToLines("input-day5.txt")
+        time { part1(input[0]) }.also { outputResult(5, 1, it) }
+    }
 }
