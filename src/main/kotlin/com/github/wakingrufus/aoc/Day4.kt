@@ -44,8 +44,35 @@ class Day4 {
         return mostCommonMinute * sleepyGuardNumber
     }
 
-    fun parseAndOrderEvents(input: List<String>): List<Event>{
-     return   input.map { parseEvent(it) }
+    fun part2(input: List<String>): Int {
+        val validEvents = parseAndOrderEvents(input)
+        val shifts = buildShifts(validEvents)
+        return mostCommonGuardAndMinute(shifts).let {
+            it.first.toInt() * it.second
+        }
+    }
+
+    fun mostCommonGuardAndMinute(shifts: List<Shift>): Pair<String, Int> {
+        val shiftsByGuard = shifts.groupBy { it.guardId }
+        val combinedShiftsByGuard = shiftsByGuard
+                .mapValues {
+                    it.value.reduce(operation = { a, b -> a + b })
+                }
+        val maxMinuteAndTimesByGuard = combinedShiftsByGuard
+                .mapValues {
+                    it.value.sleepMap
+                            .maxBy { it.value }
+                            ?.let {
+                                it.key to it.value
+                            } ?: -1 to -1
+                }
+        return maxMinuteAndTimesByGuard.maxBy { it.value.second }?.let {
+            it.key to it.value.first
+        } ?: "-1" to -1
+    }
+
+    fun parseAndOrderEvents(input: List<String>): List<Event> {
+        return input.map { parseEvent(it) }
                 .filterNot { event ->
                     (event is InvalidEvent)
                             .also { if (event is InvalidEvent) logger.warn("invalid data: ${event.input}") }
@@ -53,7 +80,7 @@ class Day4 {
                 .sortedBy { it.time }
     }
 
-    fun buildShifts(events: List<Event>): List<Shift>{
+    fun buildShifts(events: List<Event>): List<Shift> {
         return events
                 .plus(events[0])
                 .zipWithNext()
@@ -62,9 +89,10 @@ class Day4 {
                     val secondEvent = eventPair.second
                     var newAcc = acc
                     if (firstEvent is SleepStart && secondEvent is WakeUp || secondEvent is ShiftStart) {
-                        newAcc = eventPair.first.time.minute.until(eventPair.second.time.minute).fold(acc) { a, minute ->
-                            a.copy(sleepMap = a.sleepMap + (minute to (a.sleepMap[minute] ?: 0) + 1))
-                        }
+                        newAcc = eventPair.first.time.minute.until(eventPair.second.time.minute)
+                                .fold(acc) { a, minute ->
+                                    a.copy(sleepMap = a.sleepMap + (minute to (a.sleepMap[minute] ?: 0) + 1))
+                                }
                     }
                     if (secondEvent is ShiftStart) {
                         newAcc = (acc.currentGuard?.let {
@@ -74,7 +102,7 @@ class Day4 {
                             )
                         } ?: acc).copy(currentGuard = secondEvent.guardId)
                     }
-                    if(firstEvent is ShiftStart && acc.currentGuard != firstEvent.guardId){
+                    if (firstEvent is ShiftStart && acc.currentGuard != firstEvent.guardId) {
                         newAcc = acc.copy(
                                 currentGuard = firstEvent.guardId
                         )

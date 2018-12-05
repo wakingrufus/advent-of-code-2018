@@ -100,4 +100,9 @@ internal class Day4Test {
                                         3 to 4))
                 )
     }
+
+    @Test
+    fun `part 2 example`(){
+        assert(Day4().part2(sampleInput)).isEqualTo(4455)
+    }
 }
