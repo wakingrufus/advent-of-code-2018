@@ -3,6 +3,13 @@ package com.github.wakingrufus.aoc
 class Day5 {
 
     fun part1(input: String): Int = reduce(input).length
+    fun part2(input: String): Int = 'a'.rangeTo('z')
+            .map { reduceWithout(input, it) }
+            .map { it.length }
+            .min() ?: -1
+
+    fun reduceWithout(string: String, char: Char): String =
+            reduce(string.replace(char.toString(), "", true))
 
     fun reduce(string: String): String {
         val bufferedString = Char.MIN_LOW_SURROGATE + string + Char.MAX_HIGH_SURROGATE
