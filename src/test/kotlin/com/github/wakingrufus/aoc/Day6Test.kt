@@ -17,4 +17,12 @@ internal class Day6Test {
         val exampleInput = listOf("1, 1", "1, 6", "8, 3", "3, 4", "5, 5", "8, 9")
         assert(Day6().part1(exampleInput)).isEqualTo(17)
     }
+
+    @Test
+    fun `test part 2 example`() {
+        val exampleInput = listOf("1, 1", "1, 6", "8, 3", "3, 4", "5, 5", "8, 9")
+        assert(Day6().run {
+            safeZoneSize(exampleInput.map(this::parseCoordinate), 32)
+        }).isEqualTo(16)
+    }
 }
