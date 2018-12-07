@@ -56,7 +56,6 @@ class Day7 {
 class TaskTracker(val workers: Int, val baseTaskTime: Int = 60) {
     companion object : KLogging()
 
-    private val letterList = ('A'..'Z').toList()
     private val dependsOnMap: MutableMap<Char, Set<Char>> = mutableMapOf()
     private val dependencyOfMap: MutableMap<Char, Set<Char>> = mutableMapOf()
     private val executedStepList: MutableList<Char> = mutableListOf()
@@ -79,7 +78,7 @@ class TaskTracker(val workers: Int, val baseTaskTime: Int = 60) {
     }
 
     fun taskTime(task: Char): Int {
-        return letterList.indexOf(task) + 1
+        return task - 'A' + 1
     }
 
     fun hasInProgressWork(): Boolean {
