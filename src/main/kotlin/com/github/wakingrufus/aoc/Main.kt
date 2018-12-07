@@ -42,5 +42,6 @@ fun main() {
     Day7().run {
         val input = inputFileToLines("input-day7.txt")
         time { part1(input) }.also { outputResult(7, 1, it) }
+        time { part2(input) }.also { outputResult(7, 2, it) }
     }
 }

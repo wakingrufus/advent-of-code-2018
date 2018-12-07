@@ -7,3 +7,4 @@ shippable/
 *.ipr
 *.iws
 gradle.properties
+.directory
